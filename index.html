@@ -1,18 +1,122 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>simple crystal game</title>
+    <title>Crystal Game</title>
+
+    <!-- Below we added some simple CSS to resize our image-->
+    <style type="text/css">
+        .crystal-image {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+
 </head>
+
 <body>
 
-<!-- Here we added a link to the jQuery library -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Link to CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!--Link to Reset CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 
-<script type="text/javascript">
 
-  // Created a simple "alert" to get our bearings.
-  alert("hi");
 
-</script>
+    <h1>Number to Guess: <span id="number-goal"></span></h1>
+
+    <div id="crystals">
+        <!-- <img class="crystal-image" src="assets/images/crystal1.jpg" alt="crystal1";>
+    <img class="crystal-image" src="assets/images/crystal2.jpg" alt="crystal2";>
+    <img class="crystal-image" src="assets/images/crystal3.jpg" alt="crystal3";>
+    <img class="crystal-image" src="assets/images/crystal4.jpg" alt="crystal4";>
+
+-->
+    </div>
+
+
+
+
+    <!-- ============================================= -->
+    <!-- Here we added a link to the jQuery library -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--Java code sits below-->
+    <script type="text/javascript">
+
+        var winTally = 0;
+        var loseTally = 0;
+        var computerNum = 54;
+
+
+        // Here we set the "number-to-guess" header to match the "targetNumber".
+        // Eventually this will allow us to change the HTML to match the value in the JavaScript.
+        $("#number-goal").text(computerNum);
+
+        var counter = 0;
+        
+        // Next we create a for loop to create crystals for every crystalValue.
+        var numberOptions = [11, 4, 8, 5];
+        //var increment = crystalValue[Math.round(Math.random())];
+        for (var i = 0; i < numberOptions.length; i++) {
+
+            // For each iteration, we will create an imageCrystal
+            var crystalPic = $("<img>");
+            crystalPic.addClass("crystal-image");
+            crystalPic.attr("src", "assets/images/crystal1.jpg");
+            crystalPic.attr("crystal-value", numberOptions[i]);
+
+            // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
+            $("#crystals").append(crystalPic);
+
+        }
+
+
+        
+        // Here we created an on-click event that responds to button clicks of the crystal image.
+        $(".crystal-image").on("click", function () {
+
+            var crystalValue = ($(this).attr("crystal-value"));
+            crystalValue = parseInt(crystalValue);
+
+            counter += crystalValue;
+
+            // Clicking the button triggers an alert message.
+            alert("Your Score is: " + counter);
+
+            if (counter === computerNum) {
+                // Clicking the button triggers an alert message.
+                alert("You Win");
+            }
+
+            else if (counter >= computerNum) {
+                alert("You Lose!");
+            }
+
+        })
+
+
+
+
+
+        //function getRandomInt(min, max) {
+        //  min = Math.ceil(min);
+        //max = Math.floor(max);
+        // return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        //}
+
+
+
+
+
+
+        var winsText = document.$("win");
+        winsText.textContent = winTally;
+
+        var loseText = document.$("lose");
+        loseText.textContent = loseTally;
+
+    </script>
 </body>
+
 </html>
