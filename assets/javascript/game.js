@@ -3,32 +3,40 @@ $(document).ready(function () {
 
     var winTally = 0;
     var loseTally = 0;
-    var computerNum = 25;
+    var computerNum = 27;
     var min = 19;
     var max = 120;
+    var counter = 0;
 
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * 102) + 19;
     console.log(computerName);
     }
+
+    function updateWinCount() {
+        $("#win").textContent = winTally;
+    }
+    function updateLosses() {
+        $("#lose").textContent = loseTally;
+    }
+    function restartGame() {
+        counter = 0;
+        numberOptions = [];
+    }
+
+
+    // Still need to get the random integer working before the game begins
+    getRandomInt();
+    $("#number-goal").text(computerNum)
     
-
-
-    // Here we set the "number-to-guess" header to match the "targetNumber".
-    // Eventually this will allow us to change the HTML to match the value in the JavaScript.
-    $("#number-goal").text(computerNum);
-
-   
-
-    var counter = 0;
-    
-    // Next we create a for loop to create crystals for every crystalValue.
+       
+    // Next we create a for loop to create crystals for every crystalValue.>>Still need the values to switch after every game
     var numberOptions = [11, 4, 8, 5];
     //var increment = crystalValue[Math.round(Math.random())];
     for (var i = 0; i < numberOptions.length; i++) {
         console.log(numberOptions);
 
-        // For each iteration, we will create an imageCrystal
+        // For each iteration, we will create an imageCrystal>>need to get the other 3 images placed without duplicates
         var crystalPic1 = $("<img>");
         crystalPic1.addClass("crystal-image");
         crystalPic1.attr("src", "assets/images/crystal1.jpg");
@@ -56,6 +64,7 @@ function getRandomInt (min, max) {
 
     
     // Here we created an on-click event that responds to button clicks of the crystal image.
+    //The alerts need to be changed to print on the screen
     $(".crystal-image").on("click", function () {
 
         var crystalValue = ($(this).attr("crystal-value"));
@@ -66,6 +75,7 @@ function getRandomInt (min, max) {
         // Clicking the button triggers an alert message.
         alert("Your Score is: " + counter);
 
+        //Need wins and losses to print to the screen
         if (counter === computerNum) {
             // Clicking the button triggers an alert message.
             alert("You Win");
@@ -83,20 +93,10 @@ function getRandomInt (min, max) {
             //loseText.textContent = loseTally;
             //$("#lose").innerHTML = loseTally;
            console.log("Lose: " + loseTally);
-           function updateLosses();
+           updateLosses();
+           restartGame();
         }
 
     })
-    function updateWinCount() {
-        $("#win").textContent = winTally;
-    }
-    function updateLosses() {
-        $("#lose").textContent = loseTally;
-    }
-    function restartGame() {
-        counter = 0;
-        if (counter >= computerNum) {
-            restartGame();
-        }
-    }
+    
 });
